@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class MovingObject : MonoBehaviour
 {
-    public float moveTime = 0.1f; // Time taken for an object to move
+    public float moveTime = 0.1f; // Time taken for an object to move in seconds
     public LayerMask blockingLayer; // Layer on which collision(s) will be checked
 
     private BoxCollider2D boxCollider; //The BoxCollider2D component attached to the script
