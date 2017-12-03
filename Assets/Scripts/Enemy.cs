@@ -12,6 +12,11 @@ public class Enemy : MovingObject
 
     protected override void Start()
     {
+        // Register with our instance of GameManager by
+        // adding it to a list of Enemy objects. This allows
+        // the GameManager to issue movement commands.
+        GameManager.instance.AddEnemyToList(this); 
+
         animator = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Start(); 
@@ -51,8 +56,16 @@ public class Enemy : MovingObject
 
     protected override void OnCantMove<T>(T component)
     {
+        // Declare hitPlayer and set it to equal the encountered component
         Player hitPlayer = component as Player;
 
+        // Call the LoseFood function of hitPlayer
+        // passing the function the playerDamage, the amount
+        // of food points to be subtracted.
         hitPlayer.LoseFood(playerDamage);
+
+        // Set the attack trigger of the animator to 
+        // trigger the Enemy attack animation
+        animator.SetTrigger("enemyAttack"); 
     }
 }
